@@ -1,0 +1,12 @@
+[SERVICE]
+server="localhost"
+port="7000"
+debug=true
+
+[DATABASE]
+server="localhost"
+username="postgres"
+password="admin"
+port="5432"
+schema="postgres"
+connection_max=50

@@ -1,0 +1,297 @@
+definitions:
+  github_com_blox-eng_backend_internal_model.CreateWorkReport:
+    properties:
+      quantity_unit:
+        example: Kg
+        type: string
+      site_id:
+        example: 1
+        type: integer
+      work:
+        example: Hammering
+        type: string
+      work_quantity:
+        example: 10
+        type: number
+      worker:
+        example: John Doe
+        type: string
+    type: object
+  github_com_blox-eng_backend_internal_model.WorkReport:
+    properties:
+      created_at:
+        example: "2020-01-01T00:00:00Z"
+        type: string
+      deleted_at:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      quantity_unit:
+        example: Kg
+        type: string
+      site_id:
+        example: 1
+        type: integer
+      updated_at:
+        example: "2020-01-01T00:00:00Z"
+        type: string
+      work:
+        example: Hammering
+        type: string
+      work_quantity:
+        example: 10
+        type: number
+      worker:
+        example: John Doe
+        type: string
+    type: object
+  github_com_blox-eng_backend_pkg_httputil.HTTPErr:
+    properties:
+      code:
+        type: integer
+      err: {}
+    type: object
+  github_com_blox-eng_backend_pkg_httputil.Response:
+    properties:
+      data: {}
+      status: {}
+    type: object
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+info:
+  contact:
+    email: support@blox.io
+    name: API Support
+  description: This is the backend of Blox App service.
+  title: BLOX
+  version: "1.0"
+paths:
+  /api/work-reports:
+    get:
+      description: Retrieve a list of all work reports
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: A list of work reports
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/github_com_blox-eng_backend_internal_model.WorkReport'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+      summary: Get all work reports
+      tags:
+      - Work Report
+    post:
+      consumes:
+      - application/json
+      description: Create a new work report
+      parameters:
+      - description: Add Work Report
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_blox-eng_backend_internal_model.CreateWorkReport'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_blox-eng_backend_internal_model.WorkReport'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+      summary: Create a new work report
+      tags:
+      - Work Report
+  /api/work-reports/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a work report by its ID
+      parameters:
+      - description: Work report ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_blox-eng_backend_internal_model.WorkReport'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+      summary: Delete a work report
+      tags:
+      - Work Report
+    get:
+      consumes:
+      - application/json
+      description: Retrieve details of a specific work report by its ID
+      parameters:
+      - description: Work report ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_blox-eng_backend_internal_model.WorkReport'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+      summary: Get a specific work report
+      tags:
+      - Work Report
+    put:
+      consumes:
+      - application/json
+      description: Update an existing work report by its ID
+      parameters:
+      - description: Work report ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/github_com_blox-eng_backend_internal_model.WorkReport'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
+      summary: Update an existing work report
+      tags:
+      - Work Report
+swagger: "2.0"
