@@ -11,26 +11,20 @@ import (
     log "github.com/sirupsen/logrus"
 )
 
-type sqlCon struct {
-    DBPool *gorm.DB
-}
-
-var conn *sqlCon
-
 type sqlConn struct {
     DbPool *gorm.DB
 }
 
 var connector *sqlConn
 
-func InitMysql() *sqlConn {
+func InitializeDatabaseConnector() *sqlConn {
     if connector != nil {
         log.Info("DataBase is initialized")
         return connector
     }
     log.Info("DataBase was not initialized ..initializing again")
     var err error
-    connector, err = initDB()
+    connector, err = initializeDatabaseConnector()
     if err != nil {
         panic(err)
     }
@@ -39,7 +33,7 @@ func InitMysql() *sqlConn {
 
 // DB Initialization
 
-func initDB() (*sqlConn, error) {
+func initializeDatabaseConnector() (*sqlConn, error) {
     log.Info(config.GetYamlValues().DBConfig, config.GetYamlValues().DBConfig.Port)
     dbUri := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s",
     config.GetYamlValues().DBConfig.Server, config.GetYamlValues().DBConfig.Username, config.GetYamlValues().DBConfig.Schema, config.GetYamlValues().DBConfig.Password) //Build connection string
@@ -52,7 +46,7 @@ func initDB() (*sqlConn, error) {
         db.DB().SetMaxOpenConns(maxCons)
         db.DB().SetMaxIdleConns(maxCons / 3)
     }
-    db.AutoMigrate(&model.Blogs{})   
+    log.Info(db.AutoMigrate(&model.Blogs{}))   
     return &sqlConn{db}, nil
 }
 

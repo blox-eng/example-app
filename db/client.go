@@ -1,4 +1,4 @@
-package db
+package db;
 
 import (
     "github.com/blox-eng/work/model"
@@ -24,7 +24,6 @@ type Config struct {
 type sqlClient struct {
     config *Config
 }
-
 
 func (c *sqlClient) CreateBlogRecord(bl *model.Blogs) (model.BlogData, error) {
     return createBlog(bl)

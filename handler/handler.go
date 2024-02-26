@@ -1,14 +1,14 @@
-package handler;
+package handler
 
 import (
-    "net/http"
+	"net/http"
 
-    "github.com/blox-eng/work/httphandler"
-    "github.com/blox-eng/work/model"
+	"github.com/blox-eng/work/httphandler"
+	"github.com/blox-eng/work/model"
 
-    "github.com/go-chi/chi/v5"
-    "github.com/go-chi/render"
-    log "github.com/sirupsen/logrus"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/render"
+	log "github.com/sirupsen/logrus"
 )
 
 type ctx struct {
@@ -42,13 +42,13 @@ func createBlogs(store Service, w http.ResponseWriter, r *http.Request) {
 
     data := &Request{}
     if err := render.Bind(r, data); err != nil {
-        render.Render(w, r, httphandler.ErrInvalidRequest(err, "Invalid Request"))
+        log.Fatal(render.Render(w, r, httphandler.ErrInvalidRequest(err, "Invalid Request")))
         return
     }
     recordSchema := data.Blogs
     services, err := store.CreateRecordCoreTeam(recordSchema)
     if err != nil {
-        log.Errorf("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
+        log.Error("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
         httphandler.ErrInvalidRequest(err, "Unable To Fetch Services ")
         return
     }
@@ -60,7 +60,7 @@ func getRecordSetPost(store Service, w http.ResponseWriter, r *http.Request) {
     data := chi.URLParam(r, "data")
     services, err := store.GetRecordSetPost(data)
     if err != nil {
-        log.Errorf("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
+        log.Error("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
         httphandler.ErrInvalidRequest(err, "Unable To Fetch Services ")
         return
     }
@@ -79,7 +79,7 @@ func updateBlogs(store Service, w http.ResponseWriter, r *http.Request) {
     recordSchema := payload.Blogs
     services, err := store.UpdateBlog(data, recordSchema)
     if err != nil {
-        log.Errorf("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
+        log.Error("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
         httphandler.ErrInvalidRequest(err, "Unable To Fetch Services ")
         return
     }
@@ -91,7 +91,7 @@ func deleteBlogs(store Service, w http.ResponseWriter, r *http.Request) {
     data := chi.URLParam(r, "data")
     services, err := store.DeleteBlogs(data)
     if err != nil {
-        log.Errorf("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
+        log.Error("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
         httphandler.ErrInvalidRequest(err, "Unable To Fetch Services ")
         return
     }
