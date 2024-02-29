@@ -1,7 +1,7 @@
-package db;
+package db
 
 import (
-    "github.com/blox-eng/work/model"
+	"github.com/blox-eng/work/model"
 )
 
 func NewClient(config *Config) SqlClient {
@@ -11,10 +11,16 @@ func NewClient(config *Config) SqlClient {
 }
 
 type SqlClient interface {
+
     CreateBlogRecord(bl *model.Blogs) (model.BlogData, error)
     GetBlogs(string) ( model.Blogs, error)
     UpdateBlogs(id string, bl *model.Blogs) (model.BlogData, error)
     DeleteBlog(id string)(string, error)
+
+    CreateWorkReport(wr *model.WorkReport) (model.WorkReportData, error)
+    GetWorkReport(string) ( model.WorkReport, error)
+    UpdateWorkReport( id string, wr *model.WorkReport) (model.WorkReportData, error)
+    DeleteWorkReport(id string) (string, error)
 }
 
 type Config struct {
@@ -23,6 +29,22 @@ type Config struct {
 
 type sqlClient struct {
     config *Config
+}
+
+func (c *sqlClient) CreateWorkReport(wr *model.WorkReport) (model.WorkReportData, error) {
+    return createWorkReport(wr)
+}
+
+func (c *sqlClient) GetWorkReport(id string) (model.WorkReport, error) {
+    return getAllWorkReports(id)
+}
+
+func (c *sqlClient) UpdateWorkReport(id string, wr *model.WorkReport) (model.WorkReportData, error) {
+    return updateWorkReport(id, wr)
+}
+
+func (c *sqlClient) DeleteWorkReport(id string)(string, error){
+    return deleteWorkReport(id)
 }
 
 func (c *sqlClient) CreateBlogRecord(bl *model.Blogs) (model.BlogData, error) {

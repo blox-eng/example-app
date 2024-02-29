@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/blox-eng/work/db"
-	"github.com/blox-eng/work/model"
-	log "github.com/sirupsen/logrus"
+    "github.com/blox-eng/work/db"
+    "github.com/blox-eng/work/model"
+    log "github.com/sirupsen/logrus"
 )
 
 type Service interface {
@@ -11,7 +11,7 @@ type Service interface {
     GetRecordSetPost(id string) (model.Blogs, error)
     UpdateBlog(id string, bl *model.Blogs) (model.BlogData, error)
     DeleteBlogs(id string)(string, error)
-    
+    CreateWorkReport(wr *model.WorkReport) (model.WorkReportData, error) 
 }
 
 func NewService(sqlDB db.SqlClient) Service {
@@ -24,6 +24,15 @@ type service struct {
     sqlDB db.SqlClient
 }
 
+
+func (s *service) CreateWorkReport(wr *model.WorkReport)(model.WorkReportData, error){
+    record, err := s.sqlDB.CreateWorkReport(wr)
+    if err != nil {
+        log.Info("Failure: mot getting data from Table", err)
+        return model.WorkReportData{}, err
+    }
+    return record, nil
+}
 
 func (s *service) CreateRecordCoreTeam(bl *model.Blogs)(model.BlogData, error){
     record, err := s.sqlDB.CreateBlogRecord(bl)

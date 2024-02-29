@@ -28,6 +28,8 @@ func Handler(store Service) http.Handler {
     createBlogs := ctx{store: store, h:createBlogs}
     updateBlogs := ctx{store: store, h:updateBlogs}
     deleteBlogs := ctx{store: store, h:deleteBlogs}
+    createWorkReport := ctx{store: store, h:createWorkReport}
+    r.Post(httphandler.WrapHandlerFunc("/work", "create work report", createWorkReport.handle()))
 
     r.Get(httphandler.WrapHandlerFunc("/blog/{data}", "get blog", getRecordSetPost.handle()))
     r.Post(httphandler.WrapHandlerFunc("/blog", "create blog", createBlogs.handle()))
@@ -37,6 +39,24 @@ func Handler(store Service) http.Handler {
     return r
 }
 
+
+func createWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
+
+    data := &Request{}
+    if err := render.Bind(r, data); err != nil {
+        log.Fatal(render.Render(w, r, httphandler.ErrInvalidRequest(err, "Invalid Request")))
+        return
+    }
+    recordSchema := data.WorkReport
+    services, err := store.CreateWorkReport(recordSchema)
+    if err != nil {
+        log.Error("Unable To Fetch stats ", httphandler.Error(err).Code, services, err)
+        httphandler.ErrInvalidRequest(err, "Unable To Fetch Services ")
+        return
+    }
+    render.Status(r, http.StatusOK)
+    render.Render(w, r, httphandler.NewSuccessResponse(http.StatusOK, services))
+}
 
 func createBlogs(store Service, w http.ResponseWriter, r *http.Request) {
 
@@ -102,6 +122,7 @@ func deleteBlogs(store Service, w http.ResponseWriter, r *http.Request) {
 
 type Request struct {
     *model.Blogs
+    *model.WorkReport
 }
 
 func (a *Request) Bind(r *http.Request) error {

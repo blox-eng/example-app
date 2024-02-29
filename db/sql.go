@@ -1,14 +1,14 @@
 package db
 
 import (
-    "fmt"
+	"fmt"
 
-    "github.com/blox-eng/work/config"
-    "github.com/blox-eng/work/model"
+	"github.com/blox-eng/work/config"
+	"github.com/blox-eng/work/model"
 
-    "github.com/jinzhu/gorm"
-    _ "github.com/jinzhu/gorm/dialects/postgres"
-    log "github.com/sirupsen/logrus"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
+	log "github.com/sirupsen/logrus"
 )
 
 type sqlConn struct {
@@ -47,6 +47,10 @@ func initializeDatabaseConnector() (*sqlConn, error) {
         db.DB().SetMaxIdleConns(maxCons / 3)
     }
     log.Info(db.AutoMigrate(&model.Blogs{}))   
+    log.Info(db.AutoMigrate(&model.WorkReport{}))   
+    log.Info(db.AutoMigrate(&model.Site{}))   
+    log.Info(db.AutoMigrate(&model.SubSite{}))   
+
     return &sqlConn{db}, nil
 }
 
