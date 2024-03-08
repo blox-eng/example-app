@@ -28,15 +28,12 @@ func TestNewClient(t *testing.T) {
 }
 
 func Test_sqlClient_CreateWorkReport(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		wr *model.WorkReport
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.WorkReportData
 		wantErr bool
@@ -45,10 +42,7 @@ func Test_sqlClient_CreateWorkReport(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.CreateWorkReport(tt.args.wr)
+			got, err := tt.c.CreateWorkReport(tt.args.wr)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.CreateWorkReport() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -61,15 +55,12 @@ func Test_sqlClient_CreateWorkReport(t *testing.T) {
 }
 
 func Test_sqlClient_GetWorkReport(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.WorkReport
 		wantErr bool
@@ -78,10 +69,7 @@ func Test_sqlClient_GetWorkReport(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.GetWorkReport(tt.args.id)
+			got, err := tt.c.GetWorkReport(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.GetWorkReport() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -94,16 +82,13 @@ func Test_sqlClient_GetWorkReport(t *testing.T) {
 }
 
 func Test_sqlClient_UpdateWorkReport(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 		wr *model.WorkReport
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.WorkReportData
 		wantErr bool
@@ -112,10 +97,7 @@ func Test_sqlClient_UpdateWorkReport(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.UpdateWorkReport(tt.args.id, tt.args.wr)
+			got, err := tt.c.UpdateWorkReport(tt.args.id, tt.args.wr)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.UpdateWorkReport() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -128,15 +110,12 @@ func Test_sqlClient_UpdateWorkReport(t *testing.T) {
 }
 
 func Test_sqlClient_DeleteWorkReport(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    string
 		wantErr bool
@@ -145,10 +124,7 @@ func Test_sqlClient_DeleteWorkReport(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.DeleteWorkReport(tt.args.id)
+			got, err := tt.c.DeleteWorkReport(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.DeleteWorkReport() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -161,15 +137,12 @@ func Test_sqlClient_DeleteWorkReport(t *testing.T) {
 }
 
 func Test_sqlClient_CreateBlogRecord(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		bl *model.Blogs
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.BlogData
 		wantErr bool
@@ -178,10 +151,7 @@ func Test_sqlClient_CreateBlogRecord(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.CreateBlogRecord(tt.args.bl)
+			got, err := tt.c.CreateBlogRecord(tt.args.bl)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.CreateBlogRecord() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -194,15 +164,12 @@ func Test_sqlClient_CreateBlogRecord(t *testing.T) {
 }
 
 func Test_sqlClient_GetBlogs(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.Blogs
 		wantErr bool
@@ -211,10 +178,7 @@ func Test_sqlClient_GetBlogs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.GetBlogs(tt.args.id)
+			got, err := tt.c.GetBlogs(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.GetBlogs() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -227,16 +191,13 @@ func Test_sqlClient_GetBlogs(t *testing.T) {
 }
 
 func Test_sqlClient_UpdateBlogs(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 		bl *model.Blogs
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    model.BlogData
 		wantErr bool
@@ -245,10 +206,7 @@ func Test_sqlClient_UpdateBlogs(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.UpdateBlogs(tt.args.id, tt.args.bl)
+			got, err := tt.c.UpdateBlogs(tt.args.id, tt.args.bl)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.UpdateBlogs() error = %v, wantErr %v", err, tt.wantErr)
 				return
@@ -261,15 +219,12 @@ func Test_sqlClient_UpdateBlogs(t *testing.T) {
 }
 
 func Test_sqlClient_DeleteBlog(t *testing.T) {
-	type fields struct {
-		config *Config
-	}
 	type args struct {
 		id string
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		c       *sqlClient
 		args    args
 		want    string
 		wantErr bool
@@ -278,10 +233,7 @@ func Test_sqlClient_DeleteBlog(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			c := &sqlClient{
-				config: tt.fields.config,
-			}
-			got, err := c.DeleteBlog(tt.args.id)
+			got, err := tt.c.DeleteBlog(tt.args.id)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("sqlClient.DeleteBlog() error = %v, wantErr %v", err, tt.wantErr)
 				return

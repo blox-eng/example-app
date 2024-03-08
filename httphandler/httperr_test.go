@@ -5,29 +5,20 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blox-eng/service/model"
 	"github.com/go-chi/render"
 )
 
 func TestHTTPErr_Error(t *testing.T) {
-	type fields struct {
-		Err  error
-		Code int
-	}
 	tests := []struct {
-		name   string
-		fields fields
-		want   string
+		name string
+		e    HTTPErr
+		want string
 	}{
 		// TODO: Add test cases.
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := HTTPErr{
-				Err:  tt.fields.Err,
-				Code: tt.fields.Code,
-			}
-			if got := e.Error(); got != tt.want {
+			if got := tt.e.Error(); got != tt.want {
 				t.Errorf("HTTPErr.Error() = %v, want %v", got, tt.want)
 			}
 		})
@@ -76,18 +67,13 @@ func TestError(t *testing.T) {
 }
 
 func TestErrResponse_Render(t *testing.T) {
-	type fields struct {
-		HTTPStatusCode int
-		Status         model.ResponseMeta
-		AppCode        int64
-	}
 	type args struct {
 		w http.ResponseWriter
 		r *http.Request
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		e       *ErrResponse
 		args    args
 		wantErr bool
 	}{
@@ -95,12 +81,7 @@ func TestErrResponse_Render(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			e := &ErrResponse{
-				HTTPStatusCode: tt.fields.HTTPStatusCode,
-				Status:         tt.fields.Status,
-				AppCode:        tt.fields.AppCode,
-			}
-			if err := e.Render(tt.args.w, tt.args.r); (err != nil) != tt.wantErr {
+			if err := tt.e.Render(tt.args.w, tt.args.r); (err != nil) != tt.wantErr {
 				t.Errorf("ErrResponse.Render() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
@@ -108,17 +89,13 @@ func TestErrResponse_Render(t *testing.T) {
 }
 
 func TestResponse_Render(t *testing.T) {
-	type fields struct {
-		Status interface{}
-		Data   interface{}
-	}
 	type args struct {
 		w http.ResponseWriter
 		r *http.Request
 	}
 	tests := []struct {
 		name    string
-		fields  fields
+		rd      *Response
 		args    args
 		wantErr bool
 	}{
@@ -126,11 +103,7 @@ func TestResponse_Render(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			rd := &Response{
-				Status: tt.fields.Status,
-				Data:   tt.fields.Data,
-			}
-			if err := rd.Render(tt.args.w, tt.args.r); (err != nil) != tt.wantErr {
+			if err := tt.rd.Render(tt.args.w, tt.args.r); (err != nil) != tt.wantErr {
 				t.Errorf("Response.Render() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
