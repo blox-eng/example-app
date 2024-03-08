@@ -3,8 +3,8 @@ package db
 import (
 	"fmt"
 
-	"github.com/blox-eng/work/config"
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/config"
+	"github.com/blox-eng/service/model"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"

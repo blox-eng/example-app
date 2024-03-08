@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 
 	"github.com/go-chi/render"
 	"net/http"

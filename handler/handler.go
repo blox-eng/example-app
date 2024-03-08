@@ -3,8 +3,8 @@ package handler
 import (
 	"net/http"
 
-	"github.com/blox-eng/work/httphandler"
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/httphandler"
+	"github.com/blox-eng/service/model"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"

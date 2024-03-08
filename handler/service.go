@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/blox-eng/work/db"
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/db"
+	"github.com/blox-eng/service/model"
 	log "github.com/sirupsen/logrus"
 )
 

@@ -3,9 +3,9 @@ package server
 import (
 	"fmt"
 
-	"github.com/blox-eng/work/config"
-	"github.com/blox-eng/work/db"
-	"github.com/blox-eng/work/handler"
+	"github.com/blox-eng/service/config"
+	"github.com/blox-eng/service/db"
+	"github.com/blox-eng/service/handler"
 
 	"net"
 	"net/http"

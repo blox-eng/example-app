@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 )
 
 func Test_ctx_handle(t *testing.T) {

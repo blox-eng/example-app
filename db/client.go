@@ -1,7 +1,7 @@
 package db
 
 import (
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 )
 
 func NewClient(config *Config) SqlClient {

@@ -4,8 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blox-eng/work/db"
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/db"
+	"github.com/blox-eng/service/model"
 )
 
 func TestNewService(t *testing.T) {

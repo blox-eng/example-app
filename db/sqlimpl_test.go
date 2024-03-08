@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 )
 
 func Test_createBlog(t *testing.T) {

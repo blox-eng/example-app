@@ -1,8 +1,9 @@
 package main
 
 import (
-	"github.com/blox-eng/work/config"
-	"github.com/blox-eng/work/server"
+	"github.com/blox-eng/service/config"
+	"github.com/blox-eng/service/server"
+
 	log "github.com/sirupsen/logrus"
 	"net/http"
 )

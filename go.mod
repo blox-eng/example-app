@@ -1,4 +1,4 @@
-module github.com/blox-eng/work
+module github.com/blox-eng/service
 
 go 1.22
 

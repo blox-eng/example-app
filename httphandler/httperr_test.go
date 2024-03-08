@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 	"github.com/go-chi/render"
 )
 

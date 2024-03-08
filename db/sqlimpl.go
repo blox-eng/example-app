@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/blox-eng/work/model"
+	"github.com/blox-eng/service/model"
 
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"
