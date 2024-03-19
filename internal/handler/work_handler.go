@@ -14,7 +14,6 @@ import (
 // TODO: Add pagination to list routes
 // TODO: Add authentication to all routes
 // TODO: Add authorization to all routes
-// TODO: Add granular error handling
 
 // GetAllWorkReports godoc
 //
@@ -28,7 +27,7 @@ import (
 //	@Failure		404	{object}	httputil.HTTPErr							"Not Found"
 //	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
-//	@FAilure		403	{object}	httputil.HTTPErr							"Forbidden"
+//	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
 func getAllWorkReports(store Service, w http.ResponseWriter, r *http.Request) {
 	services, err := store.GetAllWorkReports()
 	if err != nil {
@@ -143,12 +142,12 @@ func updateWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 //	@Accept			json
 //	@Produce		json
 //	@Router			/api/work-reports/{id} [delete]
-//	@Success		200	{object}	httputil.Response{data=model.WorkReport}	"OK"
-//	@Failure		400	{object}	httputil.HTTPErr							"Bad Request"
-//	@Failure		404	{object}	httputil.HTTPErr							"Not Found"
-//	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
-//	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
-//	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
+//	@Success		200	{object}	httputil.Response{}	"OK"
+//	@Failure		400	{object}	httputil.HTTPErr	"Bad Request"
+//	@Failure		404	{object}	httputil.HTTPErr	"Not Found"
+//	@Failure		500	{object}	httputil.HTTPErr	"Internal Server Error"
+//	@Failure		401	{object}	httputil.HTTPErr	"Unauthorized"
+//	@Failure		403	{object}	httputil.HTTPErr	"Forbidden"
 func deleteWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	services, err := store.DeleteWorkReport(id)

@@ -2,6 +2,7 @@ package model
 
 import (
 	"errors"
+	"net/http"
 	"time"
 
 	"gorm.io/gorm"
@@ -28,6 +29,21 @@ type WorkReport struct {
 	UpdatedAt time.Time      `json:"updated_at,omitempty" example:"2020-01-01T00:00:00Z"`
 	DeletedAt gorm.DeletedAt `json:"deleted_at,omitempty" gorm:"index"`
 	CreateWorkReport
+}
+
+func (w *WorkReport) Bind(r *http.Request) error {
+	switch {
+	case len(w.Worker) == 0 || w.Worker == "":
+		return ErrWorkerInvalid
+	case len(w.Work) == 0 || w.Work == "":
+		return ErrWorkInvalid
+	case len(w.QuantityUnit) == 0 || w.QuantityUnit == "":
+		return ErrQuantityUnit
+	case len(w.Work) == 0 || w.WorkQuantity == 0:
+		return ErrWorkQuantity
+	default:
+		return nil
+	}
 }
 
 // example

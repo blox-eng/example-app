@@ -7,6 +7,7 @@ import (
 
 	"github.com/go-chi/render"
 )
+
 // TODO: Refine errors and add swagger declarative comments
 // Response is a wrapper response structure
 // Response example
@@ -92,10 +93,11 @@ func NewSuccessResponse(status int, data interface{}) *Response {
 		Data: data,
 	}
 }
+
 // ErrInvalidRequest returns a 400
 func ErrInvalidRequest(err error, message string) render.Renderer {
 	return &ErrResponse{
-		HTTPStatusCode: http.StatusOK,
+		HTTPStatusCode: http.StatusBadRequest,
 		Status: ResponseMeta{
 			AppStatusCode: http.StatusBadRequest,
 			Message:       "ERROR",
@@ -108,7 +110,7 @@ func ErrInvalidRequest(err error, message string) render.Renderer {
 
 // ErrNotFound returns a 404
 var ErrNotFound = &ErrResponse{
-	HTTPStatusCode: http.StatusOK,
+	HTTPStatusCode: http.StatusNotFound,
 	Status: ResponseMeta{
 		AppStatusCode: http.StatusNotFound,
 		Message:       "ERROR",

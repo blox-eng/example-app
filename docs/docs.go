@@ -327,19 +327,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "allOf": [
-                                {
-                                    "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
-                                },
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "data": {
-                                            "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.WorkReport"
-                                        }
-                                    }
-                                }
-                            ]
+                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
                         }
                     },
                     "400": {

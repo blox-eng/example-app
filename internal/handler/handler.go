@@ -7,6 +7,7 @@ import (
 	"github.com/blox-eng/backend/pkg/httputil"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/render"
 	// log "github.com/sirupsen/logrus"
 )
 
@@ -21,6 +22,9 @@ type Request struct {
 
 func (a *Request) Bind(r *http.Request) error {
 	//TODO: to be expanded
+	if err := render.Bind(r, a.WorkReport); err != nil {
+		return err
+	}
 	return nil
 }
 
