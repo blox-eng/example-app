@@ -61,6 +61,7 @@ func createWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 		log.Error(render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request")))
 		return
 	}
+
 	recordSchema := data.WorkReport
 	services, err := store.CreateWorkReport(recordSchema)
 	if err != nil {
