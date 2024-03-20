@@ -58,8 +58,7 @@ func getAllWorkReports(store Service, w http.ResponseWriter, r *http.Request) {
 func createWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 	data := &Request{}
 	if err := render.Bind(r, data); err != nil {
-		log.Error(render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request")))
-		return
+		render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request"))
 	}
 
 	recordSchema := data.WorkReport
