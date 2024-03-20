@@ -13,6 +13,7 @@ import (
 	"github.com/blox-eng/backend/internal/storage"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
@@ -24,6 +25,11 @@ type Server struct {
 
 func New() *Server {
 	r := chi.NewRouter()
+	r.Use(middleware.RequestID)
+	r.Use(middleware.Logger)
+	r.Use(middleware.Recoverer)
+	r.Use(middleware.URLFormat)
+	r.Use(render.SetContentType(render.ContentTypeJSON))
 	r.Use(
 		render.SetContentType(render.ContentTypeJSON),
 	)
@@ -49,7 +55,12 @@ func setupRoutesForUpdate(service handler.Service, r *chi.Mux) {
 
 	r.Route("/api", func(r chi.Router) {
 		r.Mount("/docs", httpSwagger.Handler(
-			httpSwagger.URL(fmt.Sprintf("http://%s:%s/api/docs/doc.json", config.GetYamlValues().ServerConfig.Server, config.GetYamlValues().ServerConfig.Port))))
+			httpSwagger.URL(
+				fmt.Sprintf(
+					"http://%s:%s/api/docs/doc.json",
+					config.GetYamlValues().ServerConfig.Server,
+					config.GetYamlValues().ServerConfig.Port,
+				))))
 		r.Mount("/", handler.Handler(service))
 	})
 

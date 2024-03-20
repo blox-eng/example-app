@@ -9,3 +9,12 @@ create_tests:
 .PHONY: docs
 docs:
 	"$(CURDIR)/scripts/docs.sh"
+
+.PHONY: style
+style:
+	"$(CURDIR)/scripts/style.sh"
+
+.PHONY: test
+test:
+	"$(CURDIR)/scripts/test.sh"
+
