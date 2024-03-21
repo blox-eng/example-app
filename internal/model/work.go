@@ -24,11 +24,15 @@ type CreateWorkReport struct {
 
 // WorkReport example
 type WorkReport struct {
-	ID        uint           `json:"id" gorm:"primaryKey"`
-	CreatedAt time.Time      `json:"created_at,omitempty" example:"2020-01-01T00:00:00Z"`
-	UpdatedAt time.Time      `json:"updated_at,omitempty" example:"2020-01-01T00:00:00Z"`
-	DeletedAt gorm.DeletedAt `json:"deleted_at,omitempty" gorm:"index"`
-	CreateWorkReport
+	ID           uint           `json:"id" gorm:"primaryKey"`
+	CreatedAt    time.Time      `json:"created_at,omitempty" example:"2020-01-01T00:00:00Z"`
+	UpdatedAt    time.Time      `json:"updated_at,omitempty" example:"2020-01-01T00:00:00Z"`
+	DeletedAt    gorm.DeletedAt `json:"deleted_at,omitempty" gorm:"index"`
+	Worker       string         `json:"worker" example:"John Doe"`
+	Work         string         `json:"work" example:"Hammering"`
+	WorkQuantity float64        `json:"work_quantity,omitempty" example:"10.0"`
+	QuantityUnit string         `json:"quantity_unit,omitempty" example:"Kg"`
+	SiteID       uint64         `json:"site_id,omitempty" example:"1"`
 }
 
 func (w *WorkReport) Bind(r *http.Request) error {

@@ -20,14 +20,46 @@ const docTemplate = `{
     "paths": {
         "/api/work-reports": {
             "get": {
-                "description": "Retrieve a list of all work reports",
+                "description": "Retrieve a list of work reports",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "Work Report"
                 ],
-                "summary": "Get all work reports",
+                "summary": "List work reports",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Filter by worker name",
+                        "name": "worker",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by type of work",
+                        "name": "work",
+                        "in": "query"
+                    },
+                    {
+                        "type": "number",
+                        "description": "Filter by work quantity",
+                        "name": "work_quantity",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "Filter by quantity unit",
+                        "name": "quantity_unit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Filter by site ID",
+                        "name": "site_id",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "A list of work reports",
@@ -97,7 +129,7 @@ const docTemplate = `{
                 "parameters": [
                     {
                         "description": "Add Work Report",
-                        "name": "account",
+                        "name": "workReport",
                         "in": "body",
                         "required": true,
                         "schema": {

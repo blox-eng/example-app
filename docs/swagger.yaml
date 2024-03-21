@@ -74,7 +74,28 @@ info:
 paths:
   /api/work-reports:
     get:
-      description: Retrieve a list of all work reports
+      description: Retrieve a list of work reports
+      parameters:
+      - description: Filter by worker name
+        in: query
+        name: worker
+        type: string
+      - description: Filter by type of work
+        in: query
+        name: work
+        type: string
+      - description: Filter by work quantity
+        in: query
+        name: work_quantity
+        type: number
+      - description: Filter by quantity unit
+        in: query
+        name: quantity_unit
+        type: string
+      - description: Filter by site ID
+        in: query
+        name: site_id
+        type: integer
       produces:
       - application/json
       responses:
@@ -109,7 +130,7 @@ paths:
           description: Internal Server Error
           schema:
             $ref: '#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr'
-      summary: Get all work reports
+      summary: List work reports
       tags:
       - Work Report
     post:
@@ -119,7 +140,7 @@ paths:
       parameters:
       - description: Add Work Report
         in: body
-        name: account
+        name: workReport
         required: true
         schema:
           $ref: '#/definitions/github_com_blox-eng_backend_internal_model.CreateWorkReport'

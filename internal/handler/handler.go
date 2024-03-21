@@ -39,13 +39,13 @@ func Handler(store Service) http.Handler {
 	r := chi.NewRouter()
 
 	// Define context for each endpoint handler
-	getAllWorkReports := ctx{store: store, h: getAllWorkReports}
+	listWorkReports := ctx{store: store, h: listWorkReports}
 	getWorkReport := ctx{store: store, h: getWorkReport}
 	createWorkReport := ctx{store: store, h: createWorkReport}
 	updateWorkReport := ctx{store: store, h: updateWorkReport}
 	deleteWorkReport := ctx{store: store, h: deleteWorkReport}
 
-	r.Get(httputil.WrapHandlerFunc("/work-reports", "get all work reports", getAllWorkReports.handle()))
+	r.Get(httputil.WrapHandlerFunc("/work-reports", "list work reports", listWorkReports.handle()))
 	r.Get(httputil.WrapHandlerFunc("/work-reports/{id}", "get work report", getWorkReport.handle()))
 	r.Post(httputil.WrapHandlerFunc("/work-reports", "create work report", createWorkReport.handle()))
 	r.Put(httputil.WrapHandlerFunc("/work-reports/{id}", "update work report", updateWorkReport.handle()))

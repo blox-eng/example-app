@@ -6,8 +6,8 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func (s *service) GetAllWorkReports() ([]model.WorkReport, error) {
-	records, err := s.sqlDB.GetAllWorkReports()
+func (s *service) ListWorkReports(wr *model.WorkReport) ([]model.WorkReport, error) {
+	records, err := s.sqlDB.ListWorkReports(wr)
 	if err != nil {
 		log.Info("Failure: not getting data from Table", err)
 		return []model.WorkReport{}, err

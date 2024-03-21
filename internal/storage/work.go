@@ -24,9 +24,10 @@ func createWorkReport(wr *model.WorkReport) (model.WorkReportData, error) {
 	return record, nil
 }
 
-func getAllWorkReports() ([]model.WorkReport, error) {
+func listWorkReports(wr *model.WorkReport) ([]model.WorkReport, error) {
 	var record []model.WorkReport
 	db := GetDBConnection()
+	db = db.Where(&wr)
 	if err := db.Table("work_reports").Find(&record).Error; err != nil {
 		log.Info("failure", []model.WorkReport{})
 		if errors.Is(err, gorm.ErrRecordNotFound) {

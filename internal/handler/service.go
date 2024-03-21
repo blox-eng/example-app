@@ -7,7 +7,7 @@ import (
 )
 
 type Service interface {
-	GetAllWorkReports() ([]model.WorkReport, error)
+	ListWorkReports(wr *model.WorkReport) ([]model.WorkReport, error)
 	GetWorkReport(id string) (model.WorkReport, error)
 	CreateWorkReport(wr *model.WorkReport) (model.WorkReportData, error)
 	UpdateWorkReport(id string, wr *model.WorkReport) (model.WorkReportData, error)

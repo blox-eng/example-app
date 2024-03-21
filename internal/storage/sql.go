@@ -5,7 +5,7 @@ import (
 )
 
 type SqlClient interface {
-	GetAllWorkReports() ([]model.WorkReport, error)
+	ListWorkReports(wr *model.WorkReport) ([]model.WorkReport, error)
 	CreateWorkReport(wr *model.WorkReport) (model.WorkReportData, error)
 	GetWorkReport(id string) (model.WorkReport, error)
 	UpdateWorkReport(id string, wr *model.WorkReport) (model.WorkReportData, error)
@@ -16,8 +16,8 @@ func (c *sqlClient) CreateWorkReport(wr *model.WorkReport) (model.WorkReportData
 	return createWorkReport(wr)
 }
 
-func (c *sqlClient) GetAllWorkReports() ([]model.WorkReport, error) {
-	return getAllWorkReports()
+func (c *sqlClient) ListWorkReports(wr *model.WorkReport) ([]model.WorkReport, error) {
+	return listWorkReports(wr)
 }
 
 func (c *sqlClient) GetWorkReport(id string) (model.WorkReport, error) {
