@@ -1,23 +1,23 @@
 # Blox Engineering Service
-
+<!-- Table of contents -->
 A simple Go API for managing construction related work
 
-## INSTALL LOCALLY
+## REQUIREMENTS
+- Go
+- PostgreSQL
+
+## RUN LOCALLY
+
+1. Run an instance of postgreSQL on your machine
+2. Fill out your [config.toml](./config/config.toml) with your database creds
+3. Run the service:
 
 ```bash
 git clone git@github.com:blox-eng/service.git
 cd service
 air
 ```
-
-## TODO
-
-- [] Setup log/slog and replace logrus
-- [] 
-
-## REQUIREMENTS
-- Go
-- PostgreSQL
+4. Open http://localhost:7000/api/docs/index.html to open the Swagger UI
 
 ## References
 
