@@ -1,4 +1,4 @@
-module github.com/blox-eng/backend
+module github.com/blox-eng/app
 
 go 1.22
 

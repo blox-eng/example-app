@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/blox-eng/backend/config"
-	"github.com/blox-eng/backend/internal/server"
+	"github.com/blox-eng/app/config"
+	"github.com/blox-eng/app/internal/server"
 	log "github.com/sirupsen/logrus"
 )
 

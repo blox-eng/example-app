@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/blox-eng/backend/internal/model"
+	"github.com/blox-eng/app/internal/model"
 )
 
 type SqlClient interface {

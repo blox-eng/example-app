@@ -8,11 +8,11 @@ import (
 	"os"
 
 	"github.com/a-h/templ"
-	"github.com/blox-eng/backend/cmd/web"
-	"github.com/blox-eng/backend/config"
-	_ "github.com/blox-eng/backend/docs"
-	"github.com/blox-eng/backend/internal/handler"
-	"github.com/blox-eng/backend/internal/storage"
+	"github.com/blox-eng/app/cmd/web"
+	"github.com/blox-eng/app/config"
+	_ "github.com/blox-eng/app/docs"
+	"github.com/blox-eng/app/internal/handler"
+	"github.com/blox-eng/app/internal/storage"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"

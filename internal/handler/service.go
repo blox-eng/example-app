@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/blox-eng/backend/internal/storage"
+	"github.com/blox-eng/app/internal/storage"
 
-	"github.com/blox-eng/backend/internal/model"
+	"github.com/blox-eng/app/internal/model"
 )
 
 type Service interface {

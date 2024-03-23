@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/blox-eng/backend/internal/model"
-	"github.com/blox-eng/backend/pkg/httputil"
+	"github.com/blox-eng/app/internal/model"
+	"github.com/blox-eng/app/pkg/httputil"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
 	log "github.com/sirupsen/logrus"

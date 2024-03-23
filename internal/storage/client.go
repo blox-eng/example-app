@@ -3,8 +3,8 @@ package storage
 import (
 	"fmt"
 
-	"github.com/blox-eng/backend/config"
-	"github.com/blox-eng/backend/internal/model"
+	"github.com/blox-eng/app/config"
+	"github.com/blox-eng/app/internal/model"
 
 	log "github.com/sirupsen/logrus"
 	"gorm.io/driver/postgres"
