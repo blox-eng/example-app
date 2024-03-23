@@ -51,6 +51,7 @@ func Handler(store Service) http.Handler {
 	r.Put(httputil.WrapHandlerFunc("/work-reports/{id}", "update work report", updateWorkReport.handle()))
 	r.Delete(httputil.WrapHandlerFunc("/work-reports/{id}", "delete work report", deleteWorkReport.handle()))
 
+
 	return r
 }
 

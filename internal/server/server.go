@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/a-h/templ"
+	"github.com/blox-eng/backend/cmd/web"
 	"github.com/blox-eng/backend/config"
 	_ "github.com/blox-eng/backend/docs"
 	"github.com/blox-eng/backend/internal/handler"
@@ -64,6 +66,10 @@ func setupRoutesForUpdate(service handler.Service, r *chi.Mux) {
 		r.Mount("/", handler.Handler(service))
 	})
 
+	// Serve static files
+	fileServer := http.FileServer(http.FS(web.Files))
+	r.Handle("/js/*", fileServer)
+	r.Get("/web", templ.Handler(web.HelloForm()).ServeHTTP)
 }
 
 func (s *Server) ListenAndServe() error {

@@ -1,3 +1,12 @@
+.PHONY: build
+build:
+	@templ generate
+	@go build -o blox cmd/api/main.go
+
+.PHONY: run
+run:
+	@go run cmd/api/main.go
+
 .PHONY: run_db
 run_db:
 	"$(CURDIR)/scripts/run_database.sh"
