@@ -1,0 +1,15 @@
+# Example Markdownlint Configuration
+
+# Specify which rules to enable or disable
+rules:
+  MD001: false  # Header levels should only increment by one level at a time
+  MD029: false  # Ordered list item prefix
+  MD030: false  # Spaces after list markers
+  MD041: false  # First line in file should be a top level header
+
+# Configure specific rule options
+MD007:
+  indent: 2     # Specify the number of spaces for unordered list indentation
+MD013:
+  line_length: 120  # Specify the maximum line length
+

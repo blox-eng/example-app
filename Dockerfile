@@ -19,7 +19,7 @@ COPY . .
 RUN CGO_ENABLED=0 go build -o /backend ./cmd/api/main.go
 
 # Use a minimal Alpine image as the final base
-FROM alpine:latest
+FROM alpine:3.19.1
 
 # Install CA certificates required for HTTPS
 RUN apk --no-cache add ca-certificates

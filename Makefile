@@ -4,6 +4,10 @@ build:
 	@go build -o blox ./cmd/api/main.go
 	@npx tailwindcss -i ./cmd/web/styles/main.css -o ./cmd/web/styles/tailwind.css
 
+.PHONY: install
+install:
+	"$(CURDIR)/scripts/install.sh"
+
 .PHONY: run
 run:
 	@go run cmd/api/main.go
