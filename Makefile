@@ -1,7 +1,8 @@
 .PHONY: build
 build:
 	@templ generate
-	@go build -o blox cmd/api/main.go
+	@go build -o blox ./cmd/api/main.go
+	@npx tailwindcss -i ./cmd/web/styles/main.css -o ./cmd/web/styles/tailwind.css
 
 .PHONY: run
 run:
