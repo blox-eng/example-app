@@ -4,6 +4,8 @@ import (
 	"net/http"
 
 	"github.com/blox-eng/app/internal/model"
+
+	"github.com/blox-eng/app/internal/service"
 	"github.com/blox-eng/app/pkg/httputil"
 
 	"github.com/go-chi/chi/v5"
@@ -12,8 +14,8 @@ import (
 )
 
 type ctx struct {
-	store Service
-	h     func(Service, http.ResponseWriter, *http.Request)
+	store service.Service
+	h     func(service.Service, http.ResponseWriter, *http.Request)
 }
 
 type Request struct {
@@ -35,7 +37,7 @@ func (g *ctx) handle() http.HandlerFunc {
 }
 
 // Handler returns an HTTP handler that routes requests to the appropriate endpoints.
-func Handler(store Service) http.Handler {
+func Handler(store service.Service) http.Handler {
 	r := chi.NewRouter()
 
 	// Define context for each endpoint handler

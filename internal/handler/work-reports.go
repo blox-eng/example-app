@@ -5,6 +5,7 @@ import (
 	"strconv"
 
 	"github.com/blox-eng/app/internal/model"
+	"github.com/blox-eng/app/internal/service"
 	"github.com/blox-eng/app/pkg/httputil"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/render"
@@ -34,7 +35,7 @@ import (
 //	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
 //	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
-func listWorkReports(store Service, w http.ResponseWriter, r *http.Request) {
+func listWorkReports(store service.Service, w http.ResponseWriter, r *http.Request) {
 	// Parse query parameters from the request
 	queryParams := r.URL.Query()
 	// Create a query object based on the parsed parameters
@@ -72,7 +73,7 @@ func listWorkReports(store Service, w http.ResponseWriter, r *http.Request) {
 //	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
 //	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
-func createWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
+func createWorkReport(store service.Service, w http.ResponseWriter, r *http.Request) {
 	data := &Request{}
 	//	if err := render.Bind(r, data); err != nil {
 	//		render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request"))
@@ -105,7 +106,7 @@ func createWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 //	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
 //	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
-func getWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
+func getWorkReport(store service.Service, w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	services, err := store.GetWorkReport(id)
 	if err != nil {
@@ -133,7 +134,7 @@ func getWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 //	@Failure		500	{object}	httputil.HTTPErr							"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr							"Unauthorized"
 //	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
-func updateWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
+func updateWorkReport(store service.Service, w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	payload := &Request{}
 	if err := render.Bind(r, payload); err != nil {
@@ -166,7 +167,7 @@ func updateWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
 //	@Failure		500	{object}	httputil.HTTPErr	"Internal Server Error"
 //	@Failure		401	{object}	httputil.HTTPErr	"Unauthorized"
 //	@Failure		403	{object}	httputil.HTTPErr	"Forbidden"
-func deleteWorkReport(store Service, w http.ResponseWriter, r *http.Request) {
+func deleteWorkReport(store service.Service, w http.ResponseWriter, r *http.Request) {
 	id := chi.URLParam(r, "id")
 	services, err := store.DeleteWorkReport(id)
 	if err != nil {

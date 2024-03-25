@@ -12,6 +12,7 @@ import (
 	"github.com/blox-eng/app/config"
 	_ "github.com/blox-eng/app/docs"
 	"github.com/blox-eng/app/internal/handler"
+	"github.com/blox-eng/app/internal/service"
 	"github.com/blox-eng/app/internal/storage"
 
 	"github.com/go-chi/chi/v5"
@@ -42,7 +43,7 @@ func New() *Server {
 			DBConnection: "",
 		})
 
-	s := handler.NewService(pgClient)
+	s := service.NewService(pgClient)
 	setupRoutesForUpdate(s, r)
 
 	server := newServer(r)
@@ -50,7 +51,7 @@ func New() *Server {
 	return server
 }
 
-func setupRoutesForUpdate(service handler.Service, r *chi.Mux) {
+func setupRoutesForUpdate(service service.Service, r *chi.Mux) {
 
 	// plug in sub-routers for resources: feature gate
 	// this pattern also allows for easy integration testing. see api_test.go

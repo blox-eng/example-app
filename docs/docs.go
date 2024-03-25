@@ -66,7 +66,7 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
+                                    "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.Response"
                                 },
                                 {
                                     "type": "object",
@@ -74,7 +74,7 @@ const docTemplate = `{
                                         "data": {
                                             "type": "array",
                                             "items": {
-                                                "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.WorkReport"
+                                                "$ref": "#/definitions/github_com_blox-eng_app_internal_model.WorkReport"
                                             }
                                         }
                                     }
@@ -85,31 +85,31 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     }
                 }
@@ -133,7 +133,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.CreateWorkReport"
+                            "$ref": "#/definitions/github_com_blox-eng_app_internal_model.CreateWorkReport"
                         }
                     }
                 ],
@@ -143,13 +143,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
+                                    "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.WorkReport"
+                                            "$ref": "#/definitions/github_com_blox-eng_app_internal_model.WorkReport"
                                         }
                                     }
                                 }
@@ -159,31 +159,31 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     }
                 }
@@ -217,13 +217,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
+                                    "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.WorkReport"
+                                            "$ref": "#/definitions/github_com_blox-eng_app_internal_model.WorkReport"
                                         }
                                     }
                                 }
@@ -233,31 +233,31 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     }
                 }
@@ -289,13 +289,13 @@ const docTemplate = `{
                         "schema": {
                             "allOf": [
                                 {
-                                    "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
+                                    "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.Response"
                                 },
                                 {
                                     "type": "object",
                                     "properties": {
                                         "data": {
-                                            "$ref": "#/definitions/github_com_blox-eng_backend_internal_model.WorkReport"
+                                            "$ref": "#/definitions/github_com_blox-eng_app_internal_model.WorkReport"
                                         }
                                     }
                                 }
@@ -305,31 +305,31 @@ const docTemplate = `{
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     }
                 }
@@ -359,37 +359,37 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.Response"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.Response"
                         }
                     },
                     "400": {
                         "description": "Bad Request",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "401": {
                         "description": "Unauthorized",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "403": {
                         "description": "Forbidden",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "404": {
                         "description": "Not Found",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     },
                     "500": {
                         "description": "Internal Server Error",
                         "schema": {
-                            "$ref": "#/definitions/github_com_blox-eng_backend_pkg_httputil.HTTPErr"
+                            "$ref": "#/definitions/github_com_blox-eng_app_pkg_httputil.HTTPErr"
                         }
                     }
                 }
@@ -397,7 +397,7 @@ const docTemplate = `{
         }
     },
     "definitions": {
-        "github_com_blox-eng_backend_internal_model.CreateWorkReport": {
+        "github_com_blox-eng_app_internal_model.CreateWorkReport": {
             "type": "object",
             "properties": {
                 "quantity_unit": {
@@ -422,7 +422,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_blox-eng_backend_internal_model.WorkReport": {
+        "github_com_blox-eng_app_internal_model.WorkReport": {
             "type": "object",
             "properties": {
                 "created_at": {
@@ -461,7 +461,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_blox-eng_backend_pkg_httputil.HTTPErr": {
+        "github_com_blox-eng_app_pkg_httputil.HTTPErr": {
             "type": "object",
             "properties": {
                 "code": {
@@ -470,7 +470,7 @@ const docTemplate = `{
                 "err": {}
             }
         },
-        "github_com_blox-eng_backend_pkg_httputil.Response": {
+        "github_com_blox-eng_app_pkg_httputil.Response": {
             "type": "object",
             "properties": {
                 "data": {},

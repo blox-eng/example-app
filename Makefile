@@ -7,6 +7,10 @@ build:
 .PHONY: install
 install:
 	"$(CURDIR)/scripts/install.sh"
+.PHONY: develop
+develop:
+	@air .
+	@templ generate --watch
 
 .PHONY: run
 run:
