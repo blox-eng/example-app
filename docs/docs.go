@@ -281,6 +281,15 @@ const docTemplate = `{
                         "name": "id",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "description": "Update Work Report",
+                        "name": "workReport",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/github_com_blox-eng_app_internal_model.UpdateWorkReport"
+                        }
                     }
                 ],
                 "responses": {
@@ -398,6 +407,31 @@ const docTemplate = `{
     },
     "definitions": {
         "github_com_blox-eng_app_internal_model.CreateWorkReport": {
+            "type": "object",
+            "properties": {
+                "quantity_unit": {
+                    "type": "string",
+                    "example": "Kg"
+                },
+                "site_id": {
+                    "type": "integer",
+                    "example": 1
+                },
+                "work": {
+                    "type": "string",
+                    "example": "Hammering"
+                },
+                "work_quantity": {
+                    "type": "number",
+                    "example": 10
+                },
+                "worker": {
+                    "type": "string",
+                    "example": "John Doe"
+                }
+            }
+        },
+        "github_com_blox-eng_app_internal_model.UpdateWorkReport": {
             "type": "object",
             "properties": {
                 "quantity_unit": {

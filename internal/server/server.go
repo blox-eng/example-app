@@ -14,13 +14,14 @@ import (
 	"github.com/blox-eng/app/internal/handler"
 	"github.com/blox-eng/app/internal/service"
 	"github.com/blox-eng/app/internal/storage"
-
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/render"
 	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
+// TODO: Add authentication to all routes
+// TODO: Add authorization to all routes
 type Server struct {
 	httpServer *http.Server
 	router     *chi.Mux
@@ -45,7 +46,6 @@ func New() *Server {
 
 	s := service.NewService(pgClient)
 	setupRoutesForUpdate(s, r)
-
 	server := newServer(r)
 
 	return server
@@ -70,7 +70,7 @@ func setupRoutesForUpdate(service service.Service, r *chi.Mux) {
 	// Serve static files
 	fileServer := http.FileServer(http.FS(web.Files))
 	r.Handle("/js/*", fileServer)
-	r.Get("/web", templ.Handler(web.HelloForm()).ServeHTTP)
+	r.Get("/", templ.Handler(web.Index()).ServeHTTP)
 }
 
 func (s *Server) ListenAndServe() error {

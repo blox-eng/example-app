@@ -15,11 +15,19 @@ import (
 // @contact.name	API Support
 // @contact.email	support@blox.io
 func main() {
+	// Create a new instance of Server
 	s := server.New()
+
+	// Print the port the server is listening on
 	log.Info("Listening on port:", config.GetYamlValues().ServerConfig.Port)
+
+	// Start the server
 	err := s.ListenAndServe()
-	if err != http.ErrServerClosed {
+	if err != nil && err != http.ErrServerClosed {
+		// Log any errors
 		log.Fatalf("Listen: %s\n", err)
 	}
-	log.Info("service stopped")
+
+	// Log a message when the server stops
+	log.Info("Service stopped")
 }

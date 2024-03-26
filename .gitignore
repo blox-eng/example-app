@@ -3,3 +3,4 @@ application*
 tmp/
 blox*
 ./blox/**.*
+.env

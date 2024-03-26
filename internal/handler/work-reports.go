@@ -14,8 +14,6 @@ import (
 
 // TODO: Add validation to all routes
 // TODO: Add pagination to list routes
-// TODO: Add authentication to all routes
-// TODO: Add authorization to all routes
 
 // ListWorkReports godoc
 //
@@ -75,12 +73,13 @@ func listWorkReports(store service.Service, w http.ResponseWriter, r *http.Reque
 //	@Failure		403	{object}	httputil.HTTPErr							"Forbidden"
 func createWorkReport(store service.Service, w http.ResponseWriter, r *http.Request) {
 	data := &Request{}
-	//	if err := render.Bind(r, data); err != nil {
-	//		render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request"))
-	//		return
-	//	}
+	if err := render.Bind(r, data); err != nil {
+		render.Render(w, r, httputil.ErrInvalidRequest(err, "Invalid Request"))
+		return
+	}
 
 	recordSchema := data.WorkReport
+	log.Info("recordSchema: ", recordSchema)
 	services, err := store.CreateWorkReport(recordSchema)
 	if err != nil {
 		log.Error("Unable To Fetch stats ", httputil.Error(err).Code, services, err)
@@ -123,7 +122,8 @@ func getWorkReport(store service.Service, w http.ResponseWriter, r *http.Request
 //
 //	@Summary		Update an existing work report
 //	@Description	Update an existing work report by its ID
-//	@Param			id	path	string	true	"Work report ID"
+//	@Param			id			path	string					true	"Work report ID"
+//	@Param			workReport	body	model.UpdateWorkReport	true	"Update Work Report"
 //	@Tags			Work Report
 //	@Accept			json
 //	@Produce		json

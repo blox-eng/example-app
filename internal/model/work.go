@@ -22,6 +22,14 @@ type CreateWorkReport struct {
 	SiteID       uint64  `json:"site_id,omitempty" example:"1"`
 }
 
+type UpdateWorkReport struct {
+	Worker       string  `json:"worker" example:"John Doe"`
+	Work         string  `json:"work" example:"Hammering"`
+	WorkQuantity float64 `json:"work_quantity,omitempty" example:"10.0"`
+	QuantityUnit string  `json:"quantity_unit,omitempty" example:"Kg"`
+	SiteID       uint64  `json:"site_id,omitempty" example:"1"`
+}
+
 // WorkReport example
 type WorkReport struct {
 	ID           uint           `json:"id" gorm:"primaryKey"`
@@ -35,7 +43,7 @@ type WorkReport struct {
 	SiteID       uint64         `json:"site_id,omitempty" example:"1"`
 }
 
-func (w *WorkReport) Bind(r *http.Request) error {
+func (w *WorkReport) Validate(r *http.Request) error {
 	switch {
 	case len(w.Worker) == 0 || w.Worker == "":
 		return ErrWorkerInvalid

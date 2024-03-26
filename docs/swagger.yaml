@@ -17,6 +17,24 @@ definitions:
         example: John Doe
         type: string
     type: object
+  github_com_blox-eng_app_internal_model.UpdateWorkReport:
+    properties:
+      quantity_unit:
+        example: Kg
+        type: string
+      site_id:
+        example: 1
+        type: integer
+      work:
+        example: Hammering
+        type: string
+      work_quantity:
+        example: 10
+        type: number
+      worker:
+        example: John Doe
+        type: string
+    type: object
   github_com_blox-eng_app_internal_model.WorkReport:
     properties:
       created_at:
@@ -275,6 +293,12 @@ paths:
         name: id
         required: true
         type: string
+      - description: Update Work Report
+        in: body
+        name: workReport
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_blox-eng_app_internal_model.UpdateWorkReport'
       produces:
       - application/json
       responses:
