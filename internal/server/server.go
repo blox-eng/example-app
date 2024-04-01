@@ -69,7 +69,7 @@ func setupRoutesForUpdate(service service.Service, r *chi.Mux) {
 
 	// Serve static files
 	fileServer := http.FileServer(http.FS(web.Files))
-	r.Handle("/js/*", fileServer)
+	r.Handle("/static/*", fileServer)
 	r.Get("/", templ.Handler(web.Index()).ServeHTTP)
 }
 

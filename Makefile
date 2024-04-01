@@ -1,7 +1,7 @@
 .PHONY: build
 build:
 	-templ generate
-	-npx tailwindcss -i ./cmd/web/styles/main.css -o ./cmd/web/styles/tailwind.css
+	-npx tailwindcss -i ./cmd/web/static/main.css -o ./cmd/web/static/tailwind.css
 	-go build -o blox ./cmd/api/main.go
 
 .PHONY: install
