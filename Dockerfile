@@ -16,7 +16,7 @@ RUN go mod download
 COPY . .
 
 # Build the Go application for Linux
-RUN CGO_ENABLED=0 go build ./cmd/api/main.go -o /blox
+RUN CGO_ENABLED=0 go build ./cmd/app/main.go -o /blox
 
 # Use a minimal Alpine image as the final base
 FROM alpine:3.19.1

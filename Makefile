@@ -1,38 +1,22 @@
 .PHONY: build
 build:
 	-templ generate
-	-npx tailwindcss -i ./cmd/web/static/main.css -o ./cmd/web/static/tailwind.css
-	-go build -o blox ./cmd/api/main.go
+	-npx tailwindcss -i ./static/css/input.css -o ./static/css/style.min.css --minify
+	-go build -o ./tmp/blox ./cmd/app/main.go
+	
+.PHONY: dev
+dev:
+	go build -o ./tmp/blox ./cmd/app/main.go && air
 
-.PHONY: install
-install:
-	"$(CURDIR)/scripts/install.sh"
-.PHONY: develop
-develop:
-	@air .
-	@templ generate --watch
+.PHONY: vet
+vet:
+	go vet ./...
 
-.PHONY: run
-run:
-	@go run cmd/api/main.go
-
-.PHONY: run_db
-run_db:
-	"$(CURDIR)/scripts/run_database.sh"
-
-.PHONY: create_tests
-create_tests:
-	"$(CURDIR)/scripts/create_tests.sh"
-
-.PHONY: docs
-docs:
-	"$(CURDIR)/scripts/docs.sh"
-
-.PHONY: style
-style:
-	"$(CURDIR)/scripts/style.sh"
+.PHONY: staticcheck
+staticcheck:
+	staticcheck ./...
 
 .PHONY: test
 test:
-	"$(CURDIR)/scripts/test.sh"
+	go test -race -v -timeout 30s ./...
 

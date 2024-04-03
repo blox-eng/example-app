@@ -67,7 +67,7 @@ func initializeDatabaseConnector() (*sqlConn, error) {
 		sqlDB.SetMaxIdleConns(maxCons / 3)
 	}
 	// https://gorm.io/docs/migration.html - unused columns WILL NOT BE DELETED
-	db.AutoMigrate(&model.WorkReport{})
+	db.AutoMigrate(&model.WorkReport{}, &model.Session{}, &model.User{})
 	return &sqlConn{db}, nil
 }
 

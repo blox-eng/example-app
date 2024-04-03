@@ -1,4 +1,4 @@
-package handler
+package apihandler
 
 import (
 	"net/http"
@@ -33,7 +33,7 @@ func (g *ctx) handle() http.HandlerFunc {
 }
 
 // Handler returns an HTTP handler that routes requests to the appropriate endpoints.
-func Handler(store service.Service) http.Handler {
+func APIHandler(store service.Service) http.Handler {
 	r := chi.NewRouter()
 
 	// Define context for each endpoint handler

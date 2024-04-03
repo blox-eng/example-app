@@ -13,7 +13,7 @@ import (
 // Response example
 type Response struct {
 	Status interface{} `json:"status"`
-	Data   interface{} `json:"data, omitempty"`
+	Data   interface{} `json:"data"`
 }
 
 // ResponseMeta example

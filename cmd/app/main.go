@@ -2,11 +2,18 @@ package main
 
 import (
 	"net/http"
+	"os"
 
 	"github.com/blox-eng/app/config"
 	"github.com/blox-eng/app/internal/server"
 	log "github.com/sirupsen/logrus"
 )
+
+var Environment = "development"
+
+func init() {
+	os.Setenv("env", Environment)
+}
 
 //	@title			BLOX
 //	@version		1.0

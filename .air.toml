@@ -10,7 +10,7 @@ tmp_dir = "tmp"
     # Just plain old shell command. You could use `make` as well.
     cmd = "make build"
     # Binary file yields from `cmd`.
-    bin = "./blox"
+    bin = "./tmp/blox"
     # Customize binary.
     delay = 1000
     exclude_dir = ["assets", "tmp", "vendor", "testdata"]

@@ -7,17 +7,17 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/a-h/templ"
-	"github.com/blox-eng/app/cmd/web"
 	"github.com/blox-eng/app/config"
 	_ "github.com/blox-eng/app/docs"
-	"github.com/blox-eng/app/internal/handler"
+	// apihandler "github.com/blox-eng/app/internal/handler/api"
+	uihandler "github.com/blox-eng/app/internal/handler/ui"
+	"github.com/blox-eng/app/internal/hash"
+	m "github.com/blox-eng/app/internal/middleware"
 	"github.com/blox-eng/app/internal/service"
 	"github.com/blox-eng/app/internal/storage"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
-	"github.com/go-chi/render"
-	httpSwagger "github.com/swaggo/http-swagger/v2"
+	// httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
 // TODO: Add authentication to all routes
@@ -29,14 +29,6 @@ type Server struct {
 
 func New() *Server {
 	r := chi.NewRouter()
-	r.Use(middleware.RequestID)
-	r.Use(middleware.Logger)
-	r.Use(middleware.Recoverer)
-	r.Use(middleware.URLFormat)
-	r.Use(render.SetContentType(render.ContentTypeJSON))
-	r.Use(
-		render.SetContentType(render.ContentTypeJSON),
-	)
 	storage.InitializeDatabaseConnector()
 
 	pgClient := storage.NewClient(
@@ -45,32 +37,63 @@ func New() *Server {
 		})
 
 	s := service.NewService(pgClient)
-	setupRoutesForUpdate(s, r)
+	passwordHasher := hash.NewHPasswordHash()
+
+	r.Use(
+		middleware.RequestID,
+		middleware.Logger,
+		middleware.Recoverer,
+		middleware.URLFormat,
+	)
+	fileServer := http.FileServer(http.Dir("./static"))
+	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
+
+	authMiddleware := m.NewAuthMiddleware(s, "session")
+
+	r.Group(func(r chi.Router) {
+		r.Use(
+			middleware.Logger,
+			m.TextHTMLMiddleware,
+			m.CSPMiddleware,
+			authMiddleware.AddUserToContext,
+		)
+		r.NotFound(uihandler.NewNotFoundHandler().ServeHTTP)
+
+		r.Get("/", uihandler.NewHomeHandler().ServeHTTP)
+
+		r.Get("/about", uihandler.NewAboutHandler().ServeHTTP)
+
+		r.Get("/register", uihandler.NewGetRegisterHandler().ServeHTTP)
+
+		r.Post("/register", uihandler.NewPostRegisterHandler(uihandler.PostRegisterHandlerParams{
+			Store: s,
+		}).ServeHTTP)
+		r.Get("/login", uihandler.NewGetLoginHandler().ServeHTTP)
+
+		r.Post("/login", uihandler.NewPostLoginHandler(uihandler.PostLoginHandlerParams{
+			Store:             s,
+			PasswordHasher:    passwordHasher,
+			SessionCookieName: "session",
+		}).ServeHTTP)
+
+		r.Post("/logout", uihandler.NewPostLogoutHandler(uihandler.PostLogoutHandlerParams{
+			SessionCookieName: "session",
+		}).ServeHTTP)
+	})
+
+	//	r.Route("/api", func(r chi.Router) {
+	//		r.Mount("/docs", httpSwagger.Handler(
+	//			httpSwagger.URL(
+	//				fmt.Sprintf(
+	//					"http://%s:%s/api/docs/doc.json",
+	//					config.GetYamlValues().ServerConfig.Server,
+	//					config.GetYamlValues().ServerConfig.Port,
+	//				))))
+	//		r.Mount("/", apihandler.APIHandler(service))
+	//	})
 	server := newServer(r)
 
 	return server
-}
-
-func setupRoutesForUpdate(service service.Service, r *chi.Mux) {
-
-	// plug in sub-routers for resources: feature gate
-	// this pattern also allows for easy integration testing. see api_test.go
-
-	r.Route("/api", func(r chi.Router) {
-		r.Mount("/docs", httpSwagger.Handler(
-			httpSwagger.URL(
-				fmt.Sprintf(
-					"http://%s:%s/api/docs/doc.json",
-					config.GetYamlValues().ServerConfig.Server,
-					config.GetYamlValues().ServerConfig.Port,
-				))))
-		r.Mount("/", handler.Handler(service))
-	})
-
-	// Serve static files
-	fileServer := http.FileServer(http.FS(web.Files))
-	r.Handle("/static/*", fileServer)
-	r.Get("/", templ.Handler(web.Index()).ServeHTTP)
 }
 
 func (s *Server) ListenAndServe() error {
