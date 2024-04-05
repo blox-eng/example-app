@@ -2,6 +2,7 @@
 server="localhost"
 port="7000"
 debug=true
+environment="development"
 
 [DATABASE]
 server="localhost"

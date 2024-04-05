@@ -29,9 +29,10 @@ type DBConfig struct {
 }
 
 type ServerConfig struct {
-	Server string `json:"server"`
-	Port   string `json:"port"`
-	Debug  string `json:"debug"`
+	Server      string `json:"server"`
+	Port        string `json:"port"`
+	Debug       string `json:"debug"`
+	Environment string `json:"environment"`
 }
 
 var cfg yamlConfig
@@ -84,9 +85,10 @@ func GetYamlValues() *yamlConfig {
 		MaxConnection: Viper.GetInt("DATABASE.connection_max"),
 	}
 	server := &ServerConfig{
-		Server: Viper.GetString("SERVICE.server"),
-		Port:   Viper.GetString("SERVICE.port"),
-		Debug:  Viper.GetString("SERVICE.debug"),
+		Server:      Viper.GetString("SERVICE.server"),
+		Port:        Viper.GetString("SERVICE.port"),
+		Debug:       Viper.GetString("SERVICE.debug"),
+		Environment: Viper.GetString("SERVICE.environment"),
 	}
 	yml := &yamlConfig{*Db, *server}
 	return yml

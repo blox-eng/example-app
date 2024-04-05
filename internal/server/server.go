@@ -20,8 +20,6 @@ import (
 	// httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
-// TODO: Add authentication to all routes
-// TODO: Add authorization to all routes
 type Server struct {
 	httpServer *http.Server
 	router     *chi.Mux
@@ -39,12 +37,6 @@ func New() *Server {
 	s := service.NewService(pgClient)
 	passwordHasher := hash.NewHPasswordHash()
 
-	r.Use(
-		middleware.RequestID,
-		middleware.Logger,
-		middleware.Recoverer,
-		middleware.URLFormat,
-	)
 	fileServer := http.FileServer(http.Dir("./static"))
 	r.Handle("/static/*", http.StripPrefix("/static/", fileServer))
 
@@ -53,6 +45,7 @@ func New() *Server {
 	r.Group(func(r chi.Router) {
 		r.Use(
 			middleware.Logger,
+			middleware.RequestID,
 			m.TextHTMLMiddleware,
 			m.CSPMiddleware,
 			authMiddleware.AddUserToContext,
